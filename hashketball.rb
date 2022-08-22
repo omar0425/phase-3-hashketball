@@ -1,3 +1,6 @@
+require 'pry'
+
+
 # Write your code below game_hash
 def game_hash
   {
@@ -124,6 +127,73 @@ def game_hash
       ]
     }
   }
+  
 end
 
-# Write code here
+
+
+
+
+def num_points_scored(player_name)
+  find_player(player_name)[:points]
+end
+
+
+#   players = get_players
+#   # get a list of all the players
+#   # iterate through players and find the player whose name matches the player_name parameter
+#   # return the value of 'points'
+# # players.each do |p|
+# #   if p[:player_name] == player_name
+# #     return p[:points]
+# # end
+# # end
+# found = players.find do |p|
+#   p[:player_name] == player_name
+# end
+# binding.pry
+# found[:points]
+
+# **********************
+# HELPERS
+# **********************
+
+def find_player(player_name)
+  get_players.find {|p| p[:player_name] == player_name}
+end
+
+def get_players
+  game_hash[:home][:players] += game_hash[:away][:players]
+end
+
+def shoe_size(player_name)
+  find_player(player_name)[:shoe]
+end
+
+def team_colors(team)
+ game_hash.each do |location,data|
+if data[:team_name] == team
+   return data[:colors]
+end
+end
+end
+
+def team_names
+
+  get_teams.map do |t|
+    t[:team_name]
+  end
+end
+
+def get_teams
+  
+  game_hash.values
+end
+
+
+def player_numbers(player)
+  find_player(player)[:number]
+end
+
+
+
